@@ -140,15 +140,7 @@ th.active .arrow {
 
 
 
-p, code {
-	font-size: 16px;
-	font-size: 1rem;
-}	
 
-code {
-	color: #c00;
-	font-size: 1em;
-}
 
 #content {
 	font-weight: bold;
