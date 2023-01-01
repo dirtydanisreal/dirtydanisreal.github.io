@@ -99,7 +99,53 @@ var app = new Vue({
         self.gridData = JSON.parse(xhr.responseText);
       };
       xhr.send();
+    },
+    fetchStaffData: function() {
+      var xhr = new XMLHttpRequest();
+      var self = this;
+      xhr.open(
+        "GET",
+        "https://raw.githubusercontent.com/dirtydanisreal/staffNumberData/main/staffNumbers.json"
+      );
+      xhr.onload = function() {
+        self.gridData = JSON.parse(xhr.responseText);
+      };
+      xhr.send();
+      
     }
   }
 });
 app.fetchNumData();
+
+
+
+
+
+var button = document.getElementById('button');
+
+
+var toggle = function (a, b){
+  var togg = false;
+    return function () {
+        // passes return value back to caller
+        return (togg = !togg) ? a() : b();
+    };
+};
+
+var span = document.getElementById('span')
+
+
+$('#button').on('click', toggle (function (){
+  return app.fetchStaffData();
+}, function (){
+  return app.fetchNumData();
+}));
+
+button.addEventListener('click',() => {
+  if(button.innerText === 'Standard Edition'){
+    button.innerText = 'Staff Edition';
+  }
+  else{
+    button.innerText = 'Standard Edition';
+  }
+});
