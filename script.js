@@ -88,7 +88,7 @@ var app = new Vue({
     ]
   },
   methods: {
-    fetchFilmData: function() {
+    fetchNumData: function() {
       var xhr = new XMLHttpRequest();
       var self = this;
       xhr.open(
@@ -102,4 +102,4 @@ var app = new Vue({
     }
   }
 });
-app.fetchFilmData();
+app.fetchNumData();
