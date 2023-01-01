@@ -33,9 +33,11 @@ html {
 }
 
 #button {
-    display: block;
+    display: flex;
     position: absolute;
     top: 10%;
+    width: fit-content;
+    height: fit-content;
 }
 
 
