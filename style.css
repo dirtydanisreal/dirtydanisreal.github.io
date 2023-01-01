@@ -32,6 +32,12 @@ html {
     opacity: 1;
 }
 
+#button {
+    display: block;
+    position: absolute;
+    top: 10%;
+}
+
 
 .gradient-2 {
     background: url("https://www.solidbackgrounds.com/images/2560x1440/2560x1440-blue-solid-color-background.jpg") center center no-repeat;
