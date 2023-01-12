@@ -45,7 +45,7 @@ width=device-width, height=device-height" />
 			.js("./js/util.js");
 		</script>
 		<script>
-			var config = { ALLOWED_TAGS: ['thead', '#text'], KEEP_CONTENT: true };
+			var config = { ALLOWED_TAGS: ['tbody', '#text'], KEEP_CONTENT: true };
 			var clean = DOMPurify.sanitize(dirty, {RETURN_DOM: true},{FORCE_BODY: true},config);
 		</script>
 	</head>
