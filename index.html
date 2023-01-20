@@ -11,12 +11,10 @@ width=device-width" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.3/css/bulma.min.css" />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-		<link rel="stylesheet" href="./css/style.css" />
-		<script src="https://raw.githubusercontent.com/stowball/mqGenie/master/mq.genie.min.js"></script>
-		<script src="./js/genie.js"></script>
 		<script src="https://unpkg.com/async-assets-loader@1.2.0/dist/async-assets-loader.js"></script>
 		<script>
-			var callback = function();
+			var callback = function() {};
+			var loader = new asyncAssetsLoader();
 			loader.load ([
 				{url: '/images/2560x1440-blue-solid-color-background.jpg', type: 'img'},
 				{url: '/js/script.js', type: 'script'},
@@ -26,6 +24,11 @@ width=device-width" />
 
 			
 		</script>
+		<link rel="stylesheet" href="./css/style.css" />
+		<script src="https://raw.githubusercontent.com/stowball/mqGenie/master/mq.genie.min.js"></script>
+		<script src="./js/genie.js"></script>
+		
+		
 	</head>
 	<body>
 		<div id="app" style="overflow: hidden;">
