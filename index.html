@@ -14,6 +14,18 @@ width=device-width" />
 		<link rel="stylesheet" href="./css/style.css" />
 		<script src="https://raw.githubusercontent.com/stowball/mqGenie/master/mq.genie.min.js"></script>
 		<script src="./js/genie.js"></script>
+		<script src="https://unpkg.com/async-assets-loader@1.2.0/dist/async-assets-loader.js"></script>
+		<script>
+			var callback = function();
+			loader.load ([
+				{url: '/images/2560x1440-blue-solid-color-background.jpg', type: 'img'},
+				{url: '/js/script.js', type: 'script'},
+				{url: '/js/genie.js', type: 'script'},
+				{url: '/css/style.css', type: 'style'}
+			], callback)
+
+			
+		</script>
 	</head>
 	<body>
 		<div id="app" style="overflow: hidden;">
