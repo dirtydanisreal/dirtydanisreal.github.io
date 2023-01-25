@@ -6,6 +6,8 @@
 	box-sizing: border-box
 }
 
+
+
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -21,6 +23,7 @@ html {
 	--font-size-xxl: clamp(2.44rem,2.38vw + 1.85rem,3.75rem);
 	--font-size-xxxl: clamp(3.05rem,3.54vw + 2.17rem,5rem);
 	font-size: var(--font-size-base)
+
 }
 
 .gradient {
@@ -33,8 +36,7 @@ html {
 	display: flex;
 	position: absolute;
 	top: 10%;
-	width: fit-content;
-	height: fit-content
+	
 }
 
 .gradient-2 {
