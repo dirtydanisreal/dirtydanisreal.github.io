@@ -141,3 +141,10 @@ th.active .arrow {
 .footer a {
 	color: #096784
 }
+
+#footer p {
+	padding: 0.813rem;
+	text-align: center;
+	padding-bottom: 8rem;
+	
+}
