@@ -81,3 +81,14 @@ $("#button").on("click", toggle((function() {
 }))), button.addEventListener("click", (() => {
     "Standard Edition" === button.innerText ? button.innerText = "Staff Edition" : button.innerText = "Standard Edition"
 }));
+
+
+var tovdom = require('to-virtual-dom');
+
+var html = app.fetchNumData();
+
+var vdom = tovdom(html);
+
+vdom.properties.id;
+
+
