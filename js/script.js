@@ -83,12 +83,5 @@ $("#button").on("click", toggle((function() {
 }));
 
 
-var tovdom = require('to-virtual-dom');
-
-var html = app.fetchNumData();
-
-var vdom = tovdom(html);
-
-vdom.properties.id;
 
 
