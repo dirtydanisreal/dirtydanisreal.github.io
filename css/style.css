@@ -10,6 +10,11 @@ a {
 	text-decoration: none !important;
 }
 
+html * {
+	text-decoration: none !important;
+	color: inherit;
+
+}
 
 body {
 	-webkit-font-smoothing: antialiased;
