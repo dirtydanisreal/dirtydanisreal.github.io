@@ -17,6 +17,10 @@ html * {
 
 }
 
+body.body a {
+	text-decoration: none !important;
+}
+
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
