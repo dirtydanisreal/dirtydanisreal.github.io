@@ -1,155 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<!-----created by Max Halcomb-->
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta name="keywords" content="phone, tool, UK, Kentucky, clerk">
-		<meta name="description" content="A phone tool for UKHC clerks">
-		<meta http-equiv="cache-control" content="max-age=31536000">
-		<!---<meta http-equiv="cache-control" content="public, max-age=31536000">-->
-		<title>phoneTool</title>
-		<style>body{color:#202020}</style>
-		<link rel="stylesheet" media="print" onload="this.media = 'all'" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.3/css/bulma.min.css" />
-		<link media="print" onload="this.media = 'all'" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css" />
-		<link rel="stylesheet" media="print" onload="this.media = 'all'" href="./css/bootstrap.min.css">
-		<link rel="stylesheet" media="print" onload="this.media = 'all'" href="./css/style.css">
-		<script src="https://raw.githubusercontent.com/stowball/mqGenie/master/mq.genie.min.js" async></script>
-		<!--<script src="https://raw.githubusercontent.com/jtury/quick/master/quick.min.js" defer></script>-->
-		
-		<script>
-			document.addEventListener('contextmenu', function(e){
-e.preventDefault();
+<head>
+<meta charset="UTF-8">
+<title>OCR → Clipboard (Layout Preserved)</title>
 
-document.onkeydown = function(e) {
-  if(event.keyCode == 123) {
-     return false;
-  }
-  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-     return false;
-  }
-  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-     return false;
-  }
-  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-     return false;
-  }
-  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-     return false;
-  }
-    if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) {
-     return false;
-  }
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<style>
+body {
+  background: #0d1117;
+  color: #e6edf3;
+  font-family: Arial, sans-serif;
+  padding: 20px;
 }
-});
-		</script>
-				<script defer>
+button {
+  padding: 8px 14px;
+  margin: 6px 0;
+}
+textarea {
+  width: 100%;
+  height: 340px;
+  background: #010409;
+  color: #0f0;
+  padding: 10px;
+  white-space: pre;
+  font-family: Consolas, monospace;
+}
+canvas {
+  display: none;
+}
+</style>
+</head>
 
-			(function() {
+<body>
 
-				var beforePrint = function() {
-					document.getElementsByClassName("gradient").setAttribute("style", "display: none;");
-					document.getElementsByClassName("search").setAttribute("style","display: none;")
-				};
+<h2>OCR → Clipboard (Best Possible Layout)</h2>
 
+<input type="file" id="pdfInput" accept="application/pdf">
+<br>
+<button onclick="runOCR()">Run OCR</button>
+<button onclick="copyText()">Copy to Clipboard</button>
 
-			
-				var afterPrint = function() {
-					document.getElementsByClassName("gradient").removeAttribute("style");
-					document.getElementsByClassName("search").removeAttribute("style")
-				};
-			
-				if (window.matchMedia) {
-					var mediaQueryList = window.matchMedia('print');
-					mediaQueryList.addListener(function(mql) {
-						if (mql.matches) {
-							beforePrint();
-						} else {
-							afterPrint();
-						}
-					});
-				}
-			
-				window.onbeforeprint = beforePrint;
-				window.onafterprint = afterPrint;
-			
-			});
+<h3>OCR Output</h3>
+<textarea id="output"></textarea>
 
-		</script>
-	</head>
-	<body class="body" style="text-decoration: none;">
-		<main>
-		<div id="app" style="overflow: hidden;">
-			
-			<div class="gradient" >
-				<div class="gradient-2" style="background: url(./images/background.webp) center center no-repeat;"></div>
-				<section class="hero is-medium is-bold">
-					<div class="hero-body">
-						<h1 class="title">
-							phoneTool
-							<h3 style="color: #f2f2f2;
-							font-size: small;
-							margin: 1rem;
-							padding-bottom: 0.5rem;
-							padding-left: 5%;
-							text-decoration: none;">
-								by Max Halcomb
-							</h3>
-						</h1>
-						
-						<div class="search">
-							<div id="search">
-								<input class="input" name="query" v-model="searchQuery" placeholder="Need A Number?" autocomplete="off"/>
-							</div>
-						</div>
-					</div>
-				</section>
-			</div>
-			<div class="columns content-wrap table-responsive-md is-fluid">
-				<div class="center" style="align-content: center; text-align: center; padding-top: 5%;">
-					<a href="https://phonetool.ukhc.org" style="color: blue;"><h1 >phoneTool has moved to phonetool.ukhc.org</h1></a>
-					<h3 style="padding-top: 2%;">This is site has been officially adopted and implemented by University of Kentucky Healthcare and is now behind the UK Firewall, so only UK users can access it.</h3>
-					<p style="padding-top: 2%;">Thank you for your support and feedback with new and corrected numbers. This site wouldn't be what it is without you. - Max Halcomb</p>
-				</div>
-			</div>
-			
-		</div>
-		<div id="footer" style="text-align: center; padding: 0.813rem; padding-bottom: 8rem;">
-		
-			<p> Max Halcomb - 2025®</p>
-			<a style="text-decoration: none; appearance: button; -moz-appearance: button; width: fit-content; height: fit-content; color: BLACK;" type='button' href="https://outlook.office.com/owa/?path=/mail/action/compose&to=[max@clerk.tools]&subject=phoneTool" target='_blank'><p style="text-align: center; position: relative; bottom: 6rem;">WANT A NUMBER ADDED?</p></a>
-			
-	
+<canvas id="canvas"></canvas>
 
-		</div>
-		</main>
-		<script defer>
-			
-				function updateLink(link) {
-					var number = link.innerText.replace("(","").replace(")","").replace("-","").replace(" ","").replace(/\D/g,"").replace("%","");
-					var url = "voalte://x-callback-url/voice?number=";
-					
-						window.open(url + number, "_blank");
-					
-					
-				}
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
-				
+let finalText = "";
 
-				
-			
-		</script>
+async function runOCR() {
+  const file = document.getElementById("pdfInput").files[0];
+  if (!file) return alert("Select a PDF");
 
-		
-		<!---<script src="https://cdn.jsdelivr.net/npm/@domq-js/core@1.0.0/dist/bundled/domq.umd.min.js"></script>-->
-		<script src="https://raw.githubusercontent.com/WickyNilliams/enquire.js/master/dist/enquire.min.js" defer></script>
-		<script src="https://raw.githubusercontent.com/stowball/Viewport-Genie/master/viewport.genie.min.js" defer></script>
-		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-		<script src="https://unpkg.com/vue@2.4.1/dist/vue.min.js"></script>
-		<script src="./src/script.js" async></script>
-		<script src="./js/genie.js" async></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" defer integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-		<!-----<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>--->
-	</body>
+  finalText = "";
+  document.getElementById("output").value = "Processing...\n";
+
+  const pdfData = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+
+  for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+    const page = await pdf.getPage(pageNum);
+    const viewport = page.getViewport({ scale: 2.5 });
+
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+
+    await page.render({ canvasContext: ctx, viewport }).promise;
+
+    const img = canvas.toDataURL("image/png");
+
+    const ocr = await Tesseract.recognize(img, "eng", {
+      tessedit_pageseg_mode: Tesseract.PSM.SPARSE_TEXT,
+      preserve_interword_spaces: "1"
+    });
+
+    finalText += rebuildFromLines(ocr.data.lines) + "\n";
+  }
+
+  document.getElementById("output").value = finalText;
+}
+
+function rebuildFromLines(lines) {
+  const rows = {};
+
+  for (const line of lines) {
+    const y = Math.round(line.bbox.y0 / 8);
+    if (!rows[y]) rows[y] = [];
+    rows[y].push(line);
+  }
+
+  const sortedRows = Object.keys(rows)
+    .map(Number)
+    .sort((a, b) => a - b);
+
+  let text = "";
+
+  for (const y of sortedRows) {
+    const row = rows[y].sort((a, b) => a.bbox.x0 - b.bbox.x0);
+    let line = "";
+    let cursor = 0;
+
+    for (const item of row) {
+      const x = Math.floor(item.bbox.x0 / 8);
+      const spaces = Math.max(0, x - cursor);
+      line += " ".repeat(spaces) + item.text;
+      cursor = x + item.text.length;
+    }
+
+    text += line.trimEnd() + "\n";
+  }
+
+  return text;
+}
+
+async function copyText() {
+  if (!finalText) return alert("Nothing to copy");
+  await navigator.clipboard.writeText(finalText);
+  alert("Copied to clipboard");
+}
+</script>
+
+</body>
 </html>
