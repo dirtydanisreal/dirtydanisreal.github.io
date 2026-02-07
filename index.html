@@ -58,7 +58,7 @@ async function runOCR() {
   if (!file) return alert("Select a PDF");
 
   finalText = "";
-  document.getElementById("output").value = "Processing...\n";
+  document.getElementById("output").value = "Give Me a second...\n";
 
   const pdfData = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
